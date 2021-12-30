@@ -18,6 +18,7 @@
 #include <lib/base/ebase.h>
 #include <lib/base/eenv.h>
 #include <lib/base/eerror.h>
+#include <lib/base/esimpleconfig.h>
 #include <lib/base/init.h>
 #include <lib/base/init_num.h>
 #include <lib/gdi/gmaindc.h>
@@ -341,7 +342,12 @@ int main(int argc, char **argv)
 	dsk_lcd.setRedrawTask(main);
 
 	std::string active_skin = getConfigCurrentSpinner("config.skin.primary_skin");
-	eDebug("[MAIN] Loading spinners from /usr/share/enigma2/%s/spinner/", active_skin.c_str());
+	std::string spinnerPostion = eSimpleConfig::getString("config.misc.spinnerPosition", "25,25");
+	int spinnerPostionX,spinnerPostionY;
+	if (sscanf(spinnerPostion.c_str(), "%d,%d", &spinnerPostionX, &spinnerPostionY) != 2)
+	{
+		spinnerPostionX = spinnerPostionY = 25;
+	}
 
 	int i;
 	#define MAX_SPINNER 64
