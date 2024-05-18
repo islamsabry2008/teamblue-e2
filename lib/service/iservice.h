@@ -407,6 +407,7 @@ public:
 		sCenterDVBSubs,
 
 		sGamma,
+		sVideoInfo,
 
 		sIsSoftCSA,			/* 1 if current service uses software descrambling */
 
